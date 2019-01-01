@@ -1,12 +1,10 @@
 <?php
 
+$db_config = get_db_config();
+
 return [
 
-    
-
-    'default' => env('DB_CONNECTION', 'pgsql'),
-
-    
+    'default' => $db_config['connection'],
 
     'connections' => [
 
@@ -34,27 +32,16 @@ return [
         ],
 
         'pgsql' => [
-            // 'driver' => 'pgsql',
-            // 'host' => env('DB_HOST', '127.0.0.1'),
-            // 'port' => env('DB_PORT', '5432'),
-            // 'database' => env('DB_DATABASE', 'forge'),
-            // 'username' => env('DB_USERNAME', 'forge'),
-            // 'password' => env('DB_PASSWORD', ''),
-            // 'charset' => 'utf8',
-            // 'prefix' => '',
-            // 'prefix_indexes' => true,
-            // 'schema' => 'public',
-            // 'sslmode' => 'prefer',
-                'driver' => 'pgsql',
-                'host' => env('DB_HOST', $url["host"]),
-                'port' => env('DB_PORT', '5432'),
-                'database' => env('DB_DATABASE', substr($url["path"], 1)),
-                'username' => env('DB_USERNAME', $url["user"]),
-                'password' => env('DB_PASSWORD', $url["pass"]),
-                'charset' => 'utf8',
-                'prefix' => '',
-                'schema' => 'public',
-                'sslmode' => 'prefer',
+            'driver'   => 'pgsql',
+            'host'     => $db_config['host'],
+            'port'     => env('DB_PORT', '5432'),
+            'database' => $db_config['database'],
+            'username' => $db_config['username'],
+            'password' => $db_config['password'],
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
+            'sslmode'  => 'prefer',
         ],
 
         'sqlsrv' => [
@@ -71,11 +58,7 @@ return [
 
     ],
 
-   
-
     'migrations' => 'migrations',
-
-   
 
     'redis' => [
 
